@@ -1,0 +1,14 @@
+tr
+  td
+    = link_to stationery.name.humanize, stationery_path(stationery, admin: params[:admin])
+  td
+    = stationery.in_stocks
+  td
+    = stationery.stationery_type
+  td
+    - if current_user.can_borrow?
+      = link_to 'Use / Borrow', borrow_stationery_user_path(current_user, stationery: stationery.id), class: 'btn btn-info btn-sm'
+    - if params[:admin] == '1'
+      = link_to 'Edit', edit_stationery_path(stationery, admin: params[:admin]), class: 'btn btn-default btn-sm mL10'
+      = link_to 'View', stationery_path(stationery, admin: params[:admin]), class: 'btn btn-default mL10 btn-sm'
+      = button_to 'Delete', stationery_path(stationery, admin: params[:admin]), method: :delete, class: 'btn btn-danger btn-sm mL10', data: { disable_with: 'Deleting...' }, form: { class: 'display-inline' }

@@ -1,0 +1,27 @@
+.row
+  .col-sm-12
+    - if params[:admin] == '1'
+      .pull-left
+        = link_to 'New Stationery', new_stationery_path(admin: params[:admin]), class: 'btn btn-default'
+    .pull-right
+      - if params[:admin] == '1'
+        = link_to 'I am not an Admin', stationeries_path(admin: nil), class: 'btn btn-danger'
+      - else
+        = link_to 'I am Admin', stationeries_path(admin: 1), class: 'btn btn-info'
+  .col-sm-12.mT10
+    label Stationeries
+    table.table.table-bordered
+      thead
+        tr
+          th Name
+          th width='200px' Stocks
+          th width='100px' TYPE
+          th width='350px'
+      tbody
+        - if @stationeries.empty?
+          tr
+            td.text-center colspan='4' No Stationeries yet.
+        - else
+          = render @stationeries
+    .mT20.text-center
+      = paginate @stationeries

@@ -1,0 +1,23 @@
+.row
+  .col-sm-12.mT10
+    .alert.alert-info
+      p
+        strong.mR10 NOTE:
+        span Assumed that you are an admin and can manage the users to update, deativate or activate user, you can process to borrow them stationery and clear borrowed stationery for the users.
+  .col-sm-12.mT10
+    label Users
+    table.table.table-bordered
+      thead
+        tr
+          th Full Name
+          th width='40%' Email
+          th width='100px' Status
+          th width='230px'
+      tbody
+        - if @users.empty?
+          tr
+            td.text-center colspan='4' No Users yet.
+        - else
+          = render @users
+    .mT20.text-center
+      = paginate @users

@@ -1,0 +1,29 @@
+.row
+  .col-sm-12.mT10
+    label Stationeries Hsitory
+    table.table.table-bordered
+      thead
+        tr
+          th Name
+          th width='100px' TYPE
+          td width='100px' STATUS
+          td width='200px' CREATED
+          td width='200px' DUE ON
+          th width='200px'
+      tbody
+        - if @stationeries.empty?
+          tr
+            td.text-center colspan='3' No Stationeries borrowed yet.
+        - else
+          - @stationeries.each do |s|
+            tr
+              td = s.stationery.name
+              td = s.stationery.stationery_type
+              td = s.status
+              td = timeago_tag s.created_at, :nojs => true, :limit => 10.days.ago
+              td = s.overdue_at
+              td
+                - if s.borrowed? && s.stationery.fixed?
+                  = button_to 'Clear Borrowed Stationery', clear_stationery_user_path(@user, stationery: s.id, admin: params[:admin]), method: :put, class: 'btn btn-warning btn-sm'
+    .mT20.text-center
+      = paginate @stationeries

@@ -1,0 +1,39 @@
+.row.mT20
+  .col-sm-10.col-sm-offset-1
+    .panel.panel-default
+      .panel-heading
+        h4 User Detail
+      .panel-body
+        .row
+          .col-sm-2
+            label Full Name:
+          .col-sm-10
+            p = @user.full_name.humanize
+        .row
+          .col-sm-2
+            label Email:
+          .col-sm-10
+            p = @user.email
+        .row
+          .col-sm-2
+            label Status:
+          .col-sm-10
+            p = @user.status
+        - if @user.overdue_penalty > 0
+          .row
+            .col-sm-2
+              label Overdue Panalty:
+            .col-sm-10
+              p
+                span.mR5 USD
+                span = @user.overdue_penalty
+      .panel-footer
+        .row
+          .col-sm-12
+            .pull-left
+              - if @user.can_borrow?
+                = link_to 'Use / Borrow Stationery', borrow_stationery_user_path(@user, admin: params[:admin]), class: 'btn btn-info btn-sm'
+              = link_to 'Used / Borrowed Stationery History', stationeries_history_user_path(@user, admin: params[:admin]), class: 'btn btn-default mL10 btn-sm'
+            .pull-right
+              = link_to 'Go back to Users', users_path(admin: params[:admin]), class: 'btn btn-default btn-sm'
+              = link_to 'Edit', edit_user_path(@user, admin: params[:admin]), class: 'btn btn-default mL10 btn-sm'

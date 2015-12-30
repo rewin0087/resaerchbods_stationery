@@ -1,0 +1,13 @@
+.row.mT20
+  .col-sm-6.col-sm-offset-3
+    .panel.panel-default
+      .panel-heading
+        h4 User
+      .panel-body
+        = simple_form_for(@user) do |f|
+          = f.error_notification
+          = f.input :full_name
+          = f.input :email
+          = f.input :status, collection: User::STATUSES, selected: @user.status
+          = f.button :submit, 'Save', class: 'btn btn-block btn-default', data: { disable_with: 'Saving...' }
+          = link_to 'Cancel', users_path(admin: params[:admin]), class: 'btn btn-block btn-default'

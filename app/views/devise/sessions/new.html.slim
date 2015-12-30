@@ -1,0 +1,19 @@
+.row.mT20
+  .col-sm-6.col-sm-offset-3
+    .panel.panel-default
+      .panel-heading
+        h4 Log in
+      .panel-body
+        = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          = render 'shared/flash'
+          .form-inputs
+            = f.input :email, required: false, autofocus: true
+            = f.input :password, required: false
+          .row
+            .col-sm-6
+              = f.input :remember_me, as: :boolean, class: 'pull-left' if devise_mapping.rememberable?
+
+          .form-actions
+            = f.button :submit, "Log in", class: 'btn btn-block btn-default', data: { disable_with: 'Please wait...' }
+
+        = render "devise/shared/links"

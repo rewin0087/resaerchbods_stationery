@@ -1,0 +1,14 @@
+.row.mT20
+  .col-sm-6.col-sm-offset-3
+    .panel.panel-default
+      .panel-heading
+        h4 Stationery
+      .panel-body
+        = simple_form_for(@stationery) do |f|
+          = f.error_notification
+          = f.input :name
+          = f.input :code
+          = f.input :in_stocks
+          = f.input :stationery_type, collection: Stationery::TYPES, selected: @stationery.stationery_type
+          = f.button :submit, 'Save', class: 'btn btn-block btn-default', data: { disable_with: 'Saving...' }
+          = link_to 'Cancel', stationeries_path(admin: params[:admin]), class: 'btn btn-block btn-default'

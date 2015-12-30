@@ -1,0 +1,37 @@
+.row.mT20
+  .col-sm-8.col-sm-offset-2
+    .panel.panel-default
+      .panel-heading
+        h4 Stationery Detail
+      .panel-body
+        .row
+          .col-sm-3
+            label Name:
+          .col-sm-9
+            p = @stationery.name.humanize
+        .row
+          .col-sm-3
+            label Code:
+          .col-sm-9
+            p = @stationery.code
+        .row
+          .col-sm-3
+            label In Stocks:
+          .col-sm-9
+            p = @stationery.in_stocks
+        .row
+          .col-sm-3
+            label Stationery Type:
+          .col-sm-9
+            p = @stationery.stationery_type
+      .panel-footer
+        .row
+          .col-sm-12
+            .pull-left
+              - if current_user.can_borrow?
+                = link_to 'Use / Borrow Stationery', borrow_stationery_user_path(current_user, stationery: @stationery.id, admin: params[:admin]), class: 'btn btn-info btn-sm'
+            .pull-right
+              = link_to 'Go back to Stationeries', stationeries_path(admin: params[:admin]), class: 'btn btn-sm btn-default'
+              - if params[:admin] == '1'
+                = link_to 'Edit', edit_stationery_path(@stationery, admin: params[:admin]), class: 'btn btn-default btn-sm mL10'
+                = button_to 'Delete', stationery_path(@stationery, admin: params[:admin]), method: :delete, class: 'btn btn-danger btn-sm mL10', data: { disable_with: 'Deleting...' }, form: { class: 'display-inline' }

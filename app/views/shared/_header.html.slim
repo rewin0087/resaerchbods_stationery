@@ -1,0 +1,13 @@
+nav.navbar.navbar-default
+  .container-fluid
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li
+          = link_to 'Stationeries', stationeries_path(admin: params[:admin])
+
+        - if params[:admin] == '1'
+          li
+            = link_to 'Users', users_path(admin: params[:admin])
+      ul.nav.navbar-nav.pull-right
+        li
+          = link_to 'Logout', destroy_user_session_path(admin: params[:admin])
