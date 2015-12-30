@@ -16,3 +16,4 @@
 /config/*.yml
 .Ds_Store
 /*.Ds_Store
+.byebug_history
