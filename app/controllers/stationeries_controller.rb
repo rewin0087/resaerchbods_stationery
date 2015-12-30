@@ -6,7 +6,7 @@ class StationeriesController < ApplicationController
   end
 
   def new
-    @stationery = Stationery.new()
+    @stationery = Stationery.new
   end
 
   def create
